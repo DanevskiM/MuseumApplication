@@ -1,0 +1,34 @@
+﻿
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Visit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!--TODO: Put the action name where the form should be submitted-->
+        <form asp-action="Create">
+            <input type="hidden" name="VisitorId" value="@ViewBag.VisitorId"/>
+            <div class="form-group">
+                <label class="control-label">Artifact</label>
+                <select asp-items="ViewBag.ArtifactId" name="ArtifactId"></select>
+            </div>
+            <select asp-items="ViewBag.ArtifactId" name="ArtifactId"></select>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
