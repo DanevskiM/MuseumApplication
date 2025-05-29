@@ -7,8 +7,9 @@
 <h1>View</h1>
 
 <p>
-    <!-- TODO: Add Create Visitors History button -->
-
+    <form asp-action="CreateVisitorsHistory" method="post">
+        <button type="submit" class="btn btn-primary">CreateVisitorsHistory</button>
+    </form>
 </p>
 <table class="table">
     <thead>
@@ -44,7 +45,9 @@
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
-                    <!-- TODO: Add Delete Button -->
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Are you sure?');" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
 }

@@ -12,10 +12,23 @@
     <!-- Look at the table from any Index page for help -->
     <!-- Iterate throught Model.VisitorsInHistory -->
     <!-- Display: Visitor Name, Visitor Last Name, Membership Type-->
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.VisitorInHistories)
+        {
+            <tr>
+                <td>@item.Visit.User.FirstName</td>
+                <td>@item.Visit.User.LastName</td>
+            </tr>
+        }
+    </tbody>
 </table>
-
-
-<!-- TODO: Display Total Count -->
 <div>
     <p>Total Count: </p>
+    @Model.VisitorInHistories.Sum(x => x.Quantity);
 </div>

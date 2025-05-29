@@ -18,9 +18,11 @@ namespace MuseumApplication.Web.Controllers
     {
         private readonly IVisitService _visitService;
         private readonly IArtifactService _artifactService;
+        private readonly IVisitorHistoryService _visitorHistoryService;
 
-        public VisitsController(IVisitService visitorService, IArtifactService artifactService)
+        public VisitsController(IVisitService visitorService, IArtifactService artifactService, IVisitorHistoryService visitorHistoryService)
         {
+            _visitorHistoryService = visitorHistoryService;
             _visitService = visitorService;
             _artifactService = artifactService;
         }
@@ -61,8 +63,12 @@ namespace MuseumApplication.Web.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            // TODO: Implement method
-            throw new NotImplementedException();
+            var visits = _visitService.GetById(id);
+            if(visits !=null)
+            {
+                _visitService.DeleteById(id);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Visits/CreateTransferRequest
@@ -70,9 +76,9 @@ namespace MuseumApplication.Web.Controllers
         [Authorize]
         public IActionResult CreateVisitorHistory()
         {
-            // TODO: Implement method
-            // Find current user, call service method, redirect to details in TransferRequests controller
-            throw new NotImplementedException();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var visitorHistory = _visitorHistoryService.CreateVisitorHistory(userId);
+            return RedirectToAction("Details", "TransferRequests", new { id = visitorHistory.Id });
         }
     }
 }

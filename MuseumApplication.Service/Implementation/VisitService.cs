@@ -34,8 +34,12 @@ namespace MuseumApplication.Service.Implementation
 
         public Visit DeleteById(Guid id)
         {
-            // TODO: Implement method
-            throw new NotImplementedException();
+            var visit = GetById(id);
+            if (visit==null)
+            {
+                throw new Exception("Visit not found");
+            }
+            return _repository.Delete(visit);
         }
 
         public List<Visit> GetAll()

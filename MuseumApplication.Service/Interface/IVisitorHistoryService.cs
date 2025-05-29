@@ -9,6 +9,7 @@ namespace MuseumApplication.Service.Interface
 {
     public interface IVisitorHistoryService
     {
-        VisitorHistory? GetVisitorHistoryDetails(Guid? id);
+        VisitorHistory GetVisitorHistoryDetails(Guid id);
+        VisitorHistory CreateVisitorHistory(string visitorId);
     }
 }

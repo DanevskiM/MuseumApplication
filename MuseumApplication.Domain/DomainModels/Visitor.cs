@@ -15,5 +15,6 @@ namespace MuseumApplication.Domain.DomainModels
         public DateOnly MembershipDate { get; set; }
         public string MembershipType { get; set; }
         public virtual ICollection<Visit>? Visits { get; set; }
+        public ICollection<VisitorInHistory> VisitorInHistories { get; set; }
     }
 }

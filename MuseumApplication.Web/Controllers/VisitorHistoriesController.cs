@@ -13,11 +13,12 @@ namespace MuseumApplication.Web.Controllers
         }
 
         // GET: VisitorHistories/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public IActionResult Details(Guid id)
         {
-            // TODO: Implement method
-            // Create ViewModel with Count or pass it through ViewBag/ViewData
-            throw new NotImplementedException();
+            var visitorHistories = _visitorHistoryService.GetVisitorHistoryDetails(id);
+            if (visitorHistories == null)
+                return NotFound();
+            return View(visitorHistories);
         }
     }
 }
